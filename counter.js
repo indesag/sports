@@ -1,5 +1,5 @@
 export function setupCounter(element) {
-  var tiempoRestante = 10; // Inicializar el tiempo restante en 10 segundos
+  var tiempoRestante = 20; // Inicializar el tiempo restante en 10 segundos
 
   function actualizarContador() {
     if (tiempoRestante > 0) {
