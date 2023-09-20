@@ -26,10 +26,8 @@ window.fbAsyncInit = function () {
   FB.Event.subscribe('xfbml.ready', function (msg) {
     if (msg.type === 'video') {
       var time = setTimeout(() => {
-        window.open(
-          'https://docs.google.com/forms/d/e/1FAIpQLScei-0aSwblSJUE8qgUV-4Uc_hGjhIWjA4g5NLyEowPpBVXYQ/viewform',
-          '_blank',
-        );
+        window.location.href =
+          'https://docs.google.com/forms/d/e/1FAIpQLScei-0aSwblSJUE8qgUV-4Uc_hGjhIWjA4g5NLyEowPpBVXYQ/viewform';
         clearTimeout(time);
       }, 20000);
     }
