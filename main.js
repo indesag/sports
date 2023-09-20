@@ -31,7 +31,7 @@ window.fbAsyncInit = function () {
           '_blank',
         );
         clearTimeout(time);
-      }, 10000);
+      }, 20000);
     }
   });
 };
