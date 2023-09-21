@@ -3,44 +3,43 @@ import { setupCounter } from './counter.js';
 
 document.querySelector('#app').innerHTML = `
 <p id="contador"></p>
-<div
-class="fb-video"
-data-autoplay="true"
-data-href="https://www.facebook.com/indesag/videos/1076921783685728/"
-data-width="500"
-data-show-text="true"
-></div>
+<div id="fb-root"></div>
+<div class="fb-video" data-allowfullscreen="true" data-autoplay="true" data-href="https://www.facebook.com/indesag/videos/1076921783685728/" data-width="500" data-show-text="true"><blockquote cite="https://www.facebook.com/indesag/videos/1076921783685728/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/indesag/videos/1076921783685728/"></a><p>No dejes pasar la oportunidad, el momento de iniciar a construir tu futuro es hoy 🔝
+
+‼️INSCRIPCIÓN GRATIS‼️ 
+
+“Asegura tu inversión con enseñanza de calidad en la Universidad INDESAG” 
+
+Contáctanos en 📲 74 44 10 99 82 al 85 
+
+#SomosINDESAG</p>Publicado por <a href="https://www.facebook.com/indesag">Universidad Indesag</a> en Domingo, 3 de septiembre de 2023</blockquote></div>
 `;
 
-setupCounter(document.querySelector('#contador'));
+function obtenerValorDeFormDesdeURL() {
+  // Obtener la cadena de consulta de la URL
+  var queryString = window.location.search;
 
-window.fbAsyncInit = function () {
-  FB.init({
-    appId: '571043277598714', // Reemplaza con tu ID de aplicación de Facebook
-    autoLogAppEvents: true,
-    xfbml: true,
-    version: 'v18.0', // Reemplaza con la versión de la API que estés utilizando
-  });
+  // Eliminar el signo de interrogación "?" del inicio de la cadena de consulta
+  queryString = queryString.substring(1);
 
-  // Detecta el evento de finalización de la reproducción del video
-  FB.Event.subscribe('xfbml.ready', function (msg) {
-    if (msg.type === 'video') {
-      var time = setTimeout(() => {
-        window.location.href =
-          'https://docs.google.com/forms/d/e/1FAIpQLScei-0aSwblSJUE8qgUV-4Uc_hGjhIWjA4g5NLyEowPpBVXYQ/viewform';
-        clearTimeout(time);
-      }, 20000);
+  // Dividir la cadena de consulta en pares clave-valor
+  var parametros = queryString.split('&');
+
+  // Buscar el parámetro "form" y obtener su valor
+  for (var i = 0; i < parametros.length; i++) {
+    var parametro = parametros[i].split('=');
+    if (parametro[0] === 'register') {
+      // Decodificar el valor si es necesario
+      var valorForm = decodeURIComponent(parametro[1]);
+      return valorForm;
     }
-  });
-};
+  }
 
-// Carga el SDK de Facebook
-(function (d, s, id) {
-  var js,
-    fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s);
-  js.id = id;
-  js.src = 'https://connect.facebook.net/en_US/sdk.js';
-  fjs.parentNode.insertBefore(js, fjs);
-})(document, 'script', 'facebook-jssdk');
+  // Devolver null si no se encuentra el parámetro "form" en la URL
+  return 'soccer';
+}
+
+// Ejemplo de uso:
+const valorFormEnURL = obtenerValorDeFormDesdeURL();
+
+setupCounter(document.querySelector('#contador'), valorFormEnURL);
